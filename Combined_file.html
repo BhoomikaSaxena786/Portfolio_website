@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhoomika Saxena | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary-color: #00bcd4; /* Cyan/Teal */
+      --secondary-color: #66fcf1; /* Lighter Cyan */
+      --bg-dark: #0b0c10;
+      --bg-medium: #1f2833; /* Dark Grey/Blue */
+      --text-light: #c5c6c7; /* Light Grey */
+      --text-white: #fff;
+      --header-height: 80px; /* Define a variable for consistent header height */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html {
+      scroll-behavior: smooth; /* For smooth scrolling to anchors */
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Scrollbar Style - Keep this for desktop visual appeal */
+    body::-webkit-scrollbar { width: 8px; }
+    body::-webkit-scrollbar-thumb { background-color: var(--primary-color); border-radius: 10px; }
+    body::-webkit-scrollbar-track { background-color: var(--bg-medium); }
+
+    /* === Header and Navigation === */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height); /* Set a fixed height */
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 70px; /* Reduced vertical padding since height is fixed */
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--primary-color);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    header h1:hover {
+        color: var(--secondary-color);
+    }
+    nav a {
+      color: var(--text-white);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 5px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--secondary-color);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary-color);
+      transition: 0.3s;
+    }
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Hamburger Menu Icon (Mobile) */
+    .menu-icon {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--primary-color);
+    }
+
+    /* === Section Base Styling === */
+    section {
+      padding: 100px 70px;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+      padding-top: calc(100px + var(--header-height)); /* Account for fixed header */
+    }
+    #home {
+        padding-top: 0; /* Override padding-top for full-height hero */
+    }
+    section.show-section {
+      opacity: 1;
+    }
+    .section-title {
+        text-align: center;
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+    }
+
+    
+    #home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
+      text-align: center;
+    }
+    #home h2 { font-size: 3.5rem; margin-bottom: 15px; font-weight: 700; }
+    #home h3 { color: var(--secondary-color); font-size: 1.5rem; margin-bottom: 40px; height: 1.5em; }
+    .typed-text { font-family: 'Roboto Mono', monospace; color: var(--primary-color); font-weight: 700; }
+    .cursor { display: inline-block; width: 3px; height: 1.5em; background-color: var(--primary-color); margin-left: 5px; animation: blink 0.7s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Buttons */
+    .btn {
+      display: inline-block; padding: 14px 35px; border: 2px solid var(--primary-color); color: var(--primary-color); border-radius: 50px; text-decoration: none; font-weight: 600; letter-spacing: 0.5px; transition: 0.4s; text-transform: uppercase;
+    }
+    .btn:hover {
+      background: var(--primary-color); color: var(--bg-dark); box-shadow: 0 0 25px var(--primary-color);
+    }
+    
+    /* About Section */
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 70px;
+      min-height: auto; /* Allow content to dictate height */
+    }
+    .profile-image-container { position: relative; }
+    .profile-image-container::before {
+      content: ''; position: absolute; top: -15px; left: -15px; width: calc(100% + 30px); height: calc(100% + 30px); border: 2px solid var(--primary-color); border-radius: 50%; animation: rotate 10s linear infinite; z-index: -1; opacity: 0.5;
+    }
+    @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #about img {
+      width: 280px; height: 280px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 35px rgba(0, 188, 212, 0.7); transition: transform 0.5s;
+    }
+    #about img:hover { transform: scale(1.05); }
+    #about .text { max-width: 600px; opacity: 0; transform: translateX(-80px); transition: all 1s ease; }
+    #about.show-section .text { opacity: 1; transform: translateX(0); }
+    #about h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+    #about p { color: var(--text-light); line-height: 1.8; font-size: 1.05rem; }
+
+    /* === Experience Section (Timeline) === */
+    #experience {
+      background: var(--bg-dark);
+      min-height: auto;
+    }
+    .timeline { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0; }
+    .timeline::after {
+      content: ''; position: absolute; width: 3px; background: rgba(0, 188, 212, 0.4); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    }
+    .timeline-item {
+      padding: 10px 40px; position: relative; background-color: inherit; width: 50%; opacity: 0; transition: all 0.8s ease-out;
+    }
+    .timeline-item.show { opacity: 1; transform: translateX(0) !important; /* Ensure animation runs */ }
+    /* Desktop Alignment Logic */
+    .timeline-item.left { left: 0; text-align: right; transform: translateX(-100%); }
+    .timeline-item.right { left: 50%; text-align: left; transform: translateX(100%); }
+
+    /* Desktop Content Box Adjustment */
+    .timeline-item.left .timeline-content { margin-left: auto; margin-right: -15px; width: calc(100% + 15px); text-align: left; }
+    .timeline-item.right .timeline-content { margin-left: -15px; margin-right: auto; width: calc(100% + 15px); }
+
+    /* Dot styling */
+    .timeline-item::after {
+      content: ''; position: absolute; width: 15px; height: 15px; right: -7.5px; background-color: var(--primary-color); border: 3px solid var(--bg-dark); top: 20px; border-radius: 50%; z-index: 1; box-shadow: 0 0 10px var(--primary-color);
+    }
+    .timeline-item.right::after { left: -7.5px; }
+
+    /* Content Box Styling */
+    .timeline-content {
+      padding: 20px; background-color: var(--bg-medium); position: relative; border-radius: 10px; border-left: 5px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    .timeline-item.right .timeline-content {
+      border-right: 5px solid var(--primary-color); border-left: none;
+    }
+    .timeline-content h3 { color: var(--secondary-color); margin-bottom: 5px; font-size: 1.25rem; }
+    .timeline-content .company { color: var(--primary-color); font-weight: 500; margin-bottom: 5px; display: block; }
+    .timeline-content .dates { font-size: 0.9rem; color: var(--text-light); margin-bottom: 10px; display: block; }
+    .timeline-content ul { list-style-type: disc; padding-left: 20px; color: var(--text-light); font-size: 0.95rem; }
+    .timeline-content ul li { margin-bottom: 8px; }
+
+    /* Skills */
+    #skills { min-height: auto; }
+    .skills-container {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 25px;
+    }
+    .skill-card {
+      background: var(--bg-medium); padding: 25px 20px; border-radius: 15px; text-align: center; border: 1px solid rgba(0, 188, 212, 0.3); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); transition: all 0.5s ease; opacity: 0; transform: translateY(40px);
+    }
+    .skill-card i { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 10px; }
+    .skill-card.show { opacity: 1; transform: translateY(0); }
+    .skill-card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 0 40px var(--primary-color); background: #253342; }
+    .skill-card p { font-size: 0.9rem; }
+
+    /* Projects */
+    #projects { min-height: auto; }
+    .project-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+    }
+    .project-card {
+      background: var(--bg-medium); border-radius: 15px; padding: 30px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); transition: 0.6s; transform: scale(0.9); opacity: 0; border-top: 4px solid var(--primary-color);
+    }
+    .project-card.show { opacity: 1; transform: scale(1); }
+    .project-card h3 { color: var(--secondary-color); font-size: 1.4rem; margin-bottom: 10px; }
+    .project-card p { color: var(--text-light); margin-bottom: 15px; }
+    .project-card a { color: var(--primary-color); font-weight: 500; text-decoration: none; transition: color 0.3s; }
+    .project-card a:hover { color: var(--secondary-color); text-decoration: underline; }
+    .project-card:hover { box-shadow: 0 0 40px var(--primary-color); transform: translateY(-5px); }
+
+    /* Contact */
+    #contact { text-align: center; min-height: auto; }
+    #contact p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; }
+    .contact-links a {
+      margin: 15px; color: var(--primary-color); text-decoration: none; border: 2px solid var(--primary-color); padding: 12px 25px; border-radius: 30px; transition: 0.4s; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
+    }
+    .contact-links a:hover { background: var(--primary-color); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-color); transform: translateY(-3px); }
+    .contact-links i { font-size: 1.1rem; }
+
+    footer {
+      text-align: center; padding: 25px; background: #000; font-size: 0.9rem; color: #888; border-top: 1px solid rgba(0, 188, 212, 0.1);
+    }
+
+    /* === Media Queries for Responsiveness === */
+
+    /* Tablet/Small Desktop */
+    @media (max-width: 900px) {
+        header { padding: 0 40px; }
+        section { padding: 80px 40px; padding-top: calc(80px + var(--header-height)); }
+        #home h2 { font-size: 2.5rem; }
+        #home h3 { font-size: 1.2rem; }
+        
+        /* Mobile Navigation (Hamburger) */
+        nav {
+            position: fixed;
+            top: var(--header-height);
+            right: 0;
+            width: 70%;
+            max-width: 300px;
+            height: calc(100vh - var(--header-height));
+            background: var(--bg-medium);
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+            border-left: 2px solid var(--primary-color);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            display: flex; /* Change to flex-box for vertical alignment */
+        }
+        nav.open {
+            transform: translateX(0);
+        }
+        nav a {
+            margin: 15px 0;
+            font-size: 1.2rem;
+            width: 80%;
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 198, 199, 0.1);
+            padding-bottom: 10px;
+        }
+        .menu-icon {
+            display: block; /* Show hamburger icon */
+        }
+
+        /* About Section stacking */
+        #about {
+            flex-direction: column;
+            text-align: center;
+        }
+        #about h2 {
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        #about .text {
+            transform: translateX(0); /* Remove desktop-only animation */
+            opacity: 1; /* Reset to instant show, animation handled by section.show-section */
+            max-width: 100%;
+        }
+
+        /* Timeline to Single-Column Mobile View */
+        .timeline::after {
+            left: 20px; /* Move vertical line to the left */
+        }
+        .timeline-item {
+            width: 100%; /* Full width */
+            padding-left: 50px; /* Space for the line and dot */
+            padding-right: 15px;
+            text-align: left;
+            left: 0% !important; /* Ensure all items align to the left */
+        }
+        /* Align dot to the left line */
+        .timeline-item.left::after,
+        .timeline-item.right::after {
+            left: 13px;
+            top: 25px;
+        }
+        /* Reset content box margins and borders for mobile */
+        .timeline-item.left .timeline-content,
+        .timeline-item.right .timeline-content {
+            border-left: 5px solid var(--primary-color);
+            border-right: none;
+            margin: 0;
+            width: 100%;
+        }
+    }
+
+    /* Mobile Phone */
+    @media (max-width: 600px) {
+        header { padding: 0 20px; }
+        header h1 { font-size: 1.5rem; }
+        section { padding: 60px 20px; padding-top: calc(60px + var(--header-height)); }
+        #home h2 { font-size: 2rem; }
+        #home h3 { font-size: 1rem; margin-bottom: 30px; }
+        .btn { padding: 10px 20px; }
+        .section-title { font-size: 2rem; margin-bottom: 30px; }
+        
+        #about img { width: 200px; height: 200px; }
+        #about h2 { font-size: 2rem; }
+        
+        .contact-links { display: flex; flex-direction: column; gap: 10px;}
+        .contact-links a { width: 100%; max-width: 300px; margin: 0 auto; }
+        .skills-container { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+        .project-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bhoomika Saxena</h1>
+    <nav id="main-nav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <div class="menu-icon" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+  </header>
+
+  <section id="home">
+    <h2>Hello, I'm <span style="color:var(--primary-color);">Bhoomika Saxena</span></h2>
+    <h3>
+      <span class="static-text">I am a </span>
+      <span class="typed-text" data-typed-items='"Frontend Developer" , "Full Stack web developer", "React Developer", "AI Enthusiast", "UI Designer"'></span>
+      <span class="cursor"></span>
+    </h3>
+    <a href="#projects" class="btn">Explore My Work</a> 
+  </section> 
+
+
+ 
+ <section id="about">
+  <div class="profile-image-container">
+      <img src="Snapchat-935208418~2.jpg" alt="Bhoomika Saxena" />
+  </div>
+  <div class="text">
+    <h2>About Me</h2>
+    <p>I'm a passionate <b>Web Developer</b> and <b>AI student</b> with experience building dynamic, user-centric applications. My toolkit is strong in <b>React, Redux, HTML, CSS, and JavaScript</b>. I thrive on blending creativity with technical expertise, focusing on delivering clean, high-performing code that translates into elegant and interactive web experiences. Currently, I'm excited about leveraging my AI knowledge to create innovative, data-driven frontend solutions.</p>
+    <br>
+    <a href="https://drive.google.com/file/d/1QCb43ltSerlXwfbYqXmL_ByJ9JIHUAxi/view" class="btn" style="padding: 10px 25px;" target="_blank" rel="noopener">Download CV <i class="fas fa-download"></i></a>
+  </div>
+</section>
+
+  <section id="experience">
+    <h2 class="section-title">Professional Experience & Education</h2>
+    <div class="timeline">
+      <div class="timeline-item left">
+        <div class="timeline-content">
+          <h3>Web Development Intern</h3>
+          <span class="company"><i class="fas fa-briefcase"></i> Future Algorithm Pvt. Ltd., Gurgaon</span>
+          <span class="dates"><i class="fas fa-calendar-alt"></i> Jul - Sep 2025</span>
+          <ul>
+            <li>Enhanced UI and fixed critical bugs in <b>React.js + Redux-based</b> applications, ensuring software stability.</li>
+            <li>Successfully improved application responsiveness and layout across devices, significantly boosting overall user experience.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="timeline-content">
+          <h3>Python Programming Intern</h3>
+          <span class="company"><i class="fas fa-desktop"></i> CodSoft (Remote)</span>
+          <span class="dates"><i class="fas fa-calendar-alt"></i> Oct - Nov 2023</span>
+          <ul>
+            <li>Developed several small-scale <b>Python projects</b> from concept to completion, refining problem-solving skills.</li>
+            <li>Wrote clean, highly maintainable code for basic <b>Python projects</b> and data processing scripts.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item left">
+          <div class="timeline-content">
+            <h3>B.Tech in (CSE-AI)</h3>
+            <span class="company"><i class="fas fa-graduation-cap"></i> ABES Institute of Technology</span>
+            <span class="dates"><i class="fas fa-calendar-alt"></i> Sep 2022 - May 2026</span>
+            <p>Currently studying Computer Science Engineering with a specialization in AI, applying theoretical knowledge to practical development.</p>
+          </div>
+        </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-container">
+      <div class="skill-card">
+          <i class="fab fa-html5"></i><i class="fab fa-css3-alt"></i>
+          <p>HTML & CSS</p>
+      </div>
+      <div class="skill-card">
+          <i class="fab fa-js-square"></i>
+          <p>JavaScript</p>
+      </div>
+      <div class="skill-card">
+          <i class="fab fa-react"></i>
+          <p>React.js & Redux</p>
+      </div>
+      <div class="skill-card">
+          <i class="fab fa-python"></i>
+          <p>Python</p>
+      </div>
+      <div class="skill-card">
+          <i class="fab fa-node-js"></i>
+          <p>Node.js</p>
+      </div>
+      <div class="skill-card">
+          <i class="fab fa-github"></i>
+          <p>Git & GitHub</p>
+      </div>
+      <div class="skill-card">
+          <i class="fas fa-mobile-alt"></i>
+          <p>Responsive Design</p>
+      </div>
+      <div class="skill-card">
+          <i class="fas fa-chart-line"></i>
+          <p>Data Analytics</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Guru Gemini Chatbot System <i class="fas fa-robot"></i></h3>
+        <p>A full-stack, real-time AI chatbot application built using the <b>Gemini API</b>. Features include secure, protected routes and a modern UI designed with <b>React</b> and <b>Tailwind CSS</b> for a seamless user experience.</p>
+        <a href="https://github.com/BhoomikaSaxena786/Guru_ChatBot_System" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Netflix Clone <i class="fas fa-video"></i></h3>
+        <p>A highly responsive front-end application replicating the Netflix interface. Features a movie search, trending section, and an interactive UI, demonstrating proficiency in <b>React</b> and component-based architecture.</p>
+        <a href="https://github.com/BhoomikaSaxena786/Netflix-clone-Web-app" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Spam Detection Web App <i class="fas fa-envelope-open-text"></i></h3>
+        <p>A machine learning-powered web application for real-time spam classification. Implemented with <b>Flask</b> and <b>Scikit-learn</b>, achieving a verified <b>97% accuracy</b> in distinguishing spam from legitimate messages.</p>
+        <a href="https://github.com/BhoomikaSaxena786/Spam_Email_Detection" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>Mini Interactive Projects <i class="fas fa-code"></i></h3>
+        <p>A collection of smaller, fun projects (Calculator, Weather App, Rock-Paper-Scissors) focusing on <b>DOM manipulation</b> and <b>interactive design</b> using vanilla JavaScript, HTML, and CSS fundamentals.</p>
+        <a href="https://github.com/BhoomikaSaxena786/Projects" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <p>I'm always open to new projects, collaborations, or discussing the future of frontend development. Feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:bhoomikasaxena7@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://www.linkedin.com/in/bhoomika-saxena-2aaab72a4/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/BhoomikaSaxena786" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Bhoomika Saxena. Built with <i class="fas fa-heart" style="color:red;"></i> and Code.
+  </footer>
+
+  <script>
+    // === Mobile Navigation Toggle ===
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        const icon = menuToggle.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times'); // Change to 'X' icon
+    });
+    
+    // Close nav when a link is clicked (on mobile)
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+            }
+            // Active link highlighting logic:
+            nav.querySelectorAll('a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // === Typing Effect for Home Section (Refined) ===
+    const typedTextElement = document.querySelector('.typed-text');
+    const cursor = document.querySelector('.cursor');
+    const phrases = typedTextElement.getAttribute('data-typed-items').split(', ');
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      if (isDeleting) {
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+      } else {
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        cursor.style.animation = 'none';
+        typingSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        cursor.style.animation = 'blink 0.7s infinite';
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typingSpeed = 200;
+      }
+
+      setTimeout(type, typingSpeed);
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initial active link setting (Home)
+        document.querySelector('a[href="#home"]').classList.add('active');
+        setTimeout(type, 1500);
+    });
+
+
+    // === Scroll Animations (Logic Refined for Section Tracking and Content) ===
+    const observerOptions = { threshold: 0.2 };
+    const sectionObserverOptions = { rootMargin: `-${(parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 80) - 10}px 0px -50% 0px` };
+
+    // 1. Content/Element Animation Observer (translate/scale)
+    const contentObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          // Disconnect to run animation only once
+          contentObserver.unobserve(entry.target); 
+        }
+      });
+    }, { threshold: 0.1 }); // Lower threshold for individual elements
+
+    // 2. Section Fade-In and Active Link Tracking Observer
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const section = entry.target;
+            const navLink = document.querySelector(`nav a[href="#${section.id}"]`);
+
+            if (entry.isIntersecting) {
+                // Section Fade-in
+                section.classList.add('show-section');
+
+                // Active Link logic
+                document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+                if (navLink) {
+                    navLink.classList.add('active');
+                }
+            } else {
+                // Optional: remove active class if scrolling past. Active class is mainly set on intersection.
+                // navLink.classList.remove('active');
+            }
+        });
+    }, sectionObserverOptions); // Uses custom rootMargin to factor in fixed header
+
+    // Observe all sections for fade-in and nav tracking
+    document.querySelectorAll('section').forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // Observe all animated elements for their specific animation
+    document.querySelectorAll('.project-card, .skill-card, #about .text, .timeline-item').forEach(el => contentObserver.observe(el));
+
+  </script>
+</body>
+</html> 
+
+
+
+
+
