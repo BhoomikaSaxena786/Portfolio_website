@@ -22,10 +22,7 @@ Performance Focused: Lightweight and fast loading, utilizing pure code without u
 
 **🌐 View the Live Site**
 You can view the live, deployed version of my portfolio here: 
-
-
-
-
+https://bhoomikasaxena786.github.io/Portfolio_website/
 **📁 Structure of the Repository**
 /index.html: The main entry point for the portfolio.
 
