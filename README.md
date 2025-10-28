@@ -21,7 +21,10 @@ Project Showcase: Demos and links to my most significant projects, highlighting 
 Performance Focused: Lightweight and fast loading, utilizing pure code without unnecessary bloat.
 
 **🌐 View the Live Site**
-You can view the live, deployed version of my portfolio here:
+You can view the live, deployed version of my portfolio here: 
+
+
+
 
 **📁 Structure of the Repository**
 /index.html: The main entry point for the portfolio.
